@@ -1,0 +1,10 @@
+A = [[10 1 2 3 4]; [1 9 -1 2 -3]; [2 -1 7 3 -5]; [3 2 3 12 -1]; [4 -3 -5 -1 15]];
+b = [12; -27; 14; -17; 12];
+s = [1;-2;3;-2;1];
+eps = 1e-12;
+[x1,step1] = jacobi(A,b,eps);
+[x2,step2] = gauss_seidel(A,b,eps);
+[x3,step3] = CG(A,b,eps);
+solutions = [x1 x2 x3]
+residures = [vecnorm(x1-s) vecnorm(x2-s) vecnorm(x3-s)]
+iterations = [step1 step2 step3]
