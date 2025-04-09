@@ -1,6 +1,13 @@
 function [H,P] = doubleQR(H)
-% Francis双重步位移QR迭代算法
+    % Francis双重步位移QR迭代算法
     n = size(H,1);
+    if n <= 2
+        mu = H(n, n);
+        H = H - mu * eye(n);
+        [P, R] = getQR(H);
+        H = R * P + mu * eye(n);
+        return;
+    end
     P = eye(n);
     m = n-1;
     s = H(m,m)+H(n,n);

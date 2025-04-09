@@ -2,7 +2,7 @@ function [H,Q] = realSchur(A)
 % REALSCHUR 计算实矩阵的实Schur分解：隐式QR算法
     n = size(A,1);
     [H,Q] = hessenberg(A);
-    u = 1e-16;
+    u = 1e-14;
     while true
         % 收敛性判定
         for i = 2:n

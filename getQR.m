@@ -1,16 +1,16 @@
-function [Q,R] = getQR(A)
-% 计算矩阵A的QR分解，其中A的行数不小于列数
-    m = size(A,1);
-    n = size(A,2);
+function [Q, R] = getQR(A)
+    [m, n] = size(A);
+    R = A;
     Q = eye(m);
-    for j = 1:n
-        if j<m
-            [v,beta] = householder(A(j:m,j));
-            H = eye(m-j+1)-beta*(v*v.');
-            A(j:m,j:n) = H * A(j:m,j:n);
-            Q = Q * blkdiag(eye(j-1), H);
+    for k = 1:n
+        x = R(k:m, k);
+        [v, beta] = householder(x, 2.3e-16);
+        if beta ~= 0
+            H_k = eye(m-k+1) - beta * (v * v');
+            R(k:m, k:n) = H_k * R(k:m, k:n);
+            Q(k:m,:) = H_k * Q(k:m,:);
         end
     end
-    R = A(1:n,1:n);
+    R = triu(R);
+    Q = Q';
 end
-
