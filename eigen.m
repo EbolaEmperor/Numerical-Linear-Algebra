@@ -13,5 +13,5 @@ function D = eigen(A)
             i = i+2;
         end
     end
+    D = sort(D, "descend");
 end
-
