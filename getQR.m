@@ -1,10 +1,8 @@
-function [Q, R] = getQR(A)
-    [m, n] = size(A);
-    R = A;
+function [Q, R] = getQR(R)
+    [m, n] = size(R);
     Q = eye(m);
     for k = 1:n
-        x = R(k:m, k);
-        [v, beta] = householder(x, 2.3e-16);
+        [v, beta] = householder(R(k:m, k));
         if beta ~= 0
             R(k:m, k:n) = R(k:m, k:n) - beta * v * (v' * R(k:m, k:n));
             Q(k:m,:) = Q(k:m,:) - beta * v * (v' * Q(k:m,:));
