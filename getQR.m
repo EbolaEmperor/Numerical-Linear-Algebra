@@ -6,9 +6,8 @@ function [Q, R] = getQR(A)
         x = R(k:m, k);
         [v, beta] = householder(x, 2.3e-16);
         if beta ~= 0
-            H_k = eye(m-k+1) - beta * (v * v');
-            R(k:m, k:n) = H_k * R(k:m, k:n);
-            Q(k:m,:) = H_k * Q(k:m,:);
+            R(k:m, k:n) = R(k:m, k:n) - beta * v * (v' * R(k:m, k:n));
+            Q(k:m,:) = Q(k:m,:) - beta * v * (v' * Q(k:m,:));
         end
     end
     R = triu(R);
