@@ -1,0 +1,8 @@
+tmpppp.m
+*.mexmaca64
+.DS_Store
+*/.DS_Store
+.DS_Store?
+*/.vscode/*
+.vscode/*
+

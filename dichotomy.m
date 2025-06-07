@@ -1,9 +1,9 @@
 function [lambda,v] = dichotomy(T,m)
-% 利用二分法求非退化对称三对角阵T的第m大特征值
+% 利用二分法求非退化对称三对角阵 T 的第 m 小特征值
     r = norm(T,inf);
     l = -r;
     eps = 1e-15;
-    while r-l > eps
+    while r-l > eps * max([abs(l), 1])
         mid = (l+r)/2;
         if variant(T,mid) >= m, r=mid;
         else, l=mid; end
