@@ -10,13 +10,13 @@ function [H, Q] = hessenberg(A)
     Q = eye(n);
     H = A;
     for k = 1:n-2
-        [v, beta] = householder(H(k+1:n, k));
-        w = beta * (v' * H(k+1:n, k:n));
-        H(k+1:n, k:n) = H(k+1:n, k:n) - v * w;
-        w = beta * (H(1:n, k+1:n) * v);
-        H(1:n, k+1:n) = H(1:n, k+1:n) - w * v';
-        w = beta * (Q(:, k+1:n) * v);
-        Q(:, k+1:n) = Q(:, k+1:n) - w * v';
+        [v, beta] = householder(H(k+1:end, k));
+        w = beta * (v' * H(k+1:end, k:end));
+        H(k+1:end, k:end) = H(k+1:end, k:end) - v * w;
+        w = beta * (H(1:end, k+1:end) * v);
+        H(1:end, k+1:end) = H(1:end, k+1:end) - w * v';
+        w = beta * (Q(:, k+1:end) * v);
+        Q(:, k+1:end) = Q(:, k+1:end) - w * v';
     end
     H(tril(true(n), -2)) = 0;
 end
